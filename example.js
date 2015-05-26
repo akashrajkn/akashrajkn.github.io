@@ -5,9 +5,9 @@ angular.module('ui.bootstrap.demo').controller('ModalDemoCtrl', function ($scope
 
   $scope.animationsEnabled = true;
 
-  $scope.open = function (size) {
+  $scope.open1 = function (size) {
 
-    var modalInstance = $modal.open({
+    var modalInstance = $modal.open1({
       animation: $scope.animationsEnabled,
       templateUrl: 'myModalContent.html',
       controller: 'ModalInstanceCtrl',
