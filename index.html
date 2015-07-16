@@ -352,7 +352,7 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2">
+          <div class="col-lg-12">
             <div class="modal-body">
               <h2>Prediction of Whitespaces for effective spectrum utilization using Cognitive Radio</h2>
               <hr class="star-primary">
@@ -393,27 +393,61 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2">
+          <div class="col-lg-12">
             <div class="modal-body">
-              <h2>Project Title</h2>
+              <h2>Implementation of 2048 in OpenGL, and making an AI-solver</h2>
               <hr class="star-primary">
               <img src="img/portfolio/cake.png" class="img-responsive img-centered" alt="">
-              <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase
-                the entire set with 146 icons for only $12!</p>
-              <ul class="list-inline item-details">
-                <li>Client:
-                  <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                  </strong>
-                </li>
-                <li>Date:
-                  <strong><a href="http://startbootstrap.com">April 2014</a>
-                  </strong>
-                </li>
-                <li>Service:
-                  <strong><a href="http://startbootstrap.com">Web Development</a>
-                  </strong>
-                </li>
-              </ul>
+
+              <h2> Outline </h2>
+              <p style="text-align:justify">
+                  2048 game was implemented. OpenGL api and C++, and SOIL package to display pics were used to achieve this. The code
+                  was written to extend the game upto 10x10 board size.
+              </p>
+
+              <h2> AI-solver </h2>
+
+              <p style="text-align:justify">
+                The intuition to ai-solver is as follows: For each game state, one of the 4 possible directions can be the next
+                move. Each of these next moves results in a different game state. Now, a random position is generated and can be
+                anywhere in the '0' cells of the new game state. Theoretically, if enough computation power is available, all the
+                game states can be traversed and the game can be solved. This is an exponential solution and time taken is huge.
+                This method can be made better using back-propogation and depth-first-search. This is again a exponential solution.
+              </p>
+
+              <p style="text-align: justify">
+                 Many game states can be intelligently removed using a simple heuristic. The corner positions of the matrix have
+                 maximum weights and the other cells weights decreases slowly. An example weight assignment would be
+                 {{3,2,1,0},{2,1,0,-1},{1,0,-1,-2},{0,-1,-2,-3}}. similarly the weight assignment with bottom-right as the highest
+                 values is -(top-left). So basically we have two different weight assignments.
+              </p>
+
+              <p style="text-align: justify">
+                The solver basically tries to minimize the worst possible loss. that is based on minimax decision rule, it tries to
+                avoid the worst case scenario. the minimax rule and the expectiminimax tree are actually fromulated for 2-player
+                ZERO-SUM game, this strategy can be extended to 2048 game. it searches the space and creates a tree until it reaches
+                a possible predefined depth.
+              </p>
+
+              <br />
+
+              <h3> how AI is used to solve 2048</h3>
+               <p style="text-align: justify">
+                  Identification of two players(analogous to the zero-sum game): first is the ai solver which plays teh game and the
+                  second is the computer which assigns a random position with values 2 or 4. Now the frist player-aisolver tries to
+                  maximize the score (which is calculated based on the heuristic described above). according to the zero-sum game,
+                  the second player 'computer' should try to minimize its loss.
+               </p>
+
+               <p style="text-align: justify">
+                 the sover implemented here uses the expectiminimax algorithm. its a variation of the minimax algo, but the outcome
+                 depends upon the expected value of the random event occuring. here the random event is the new position of the 2 or
+                 4 occuring after each move. depth is taken as 3. more than 3 is making the program to run very slowly. another
+                 assumption that we are taking here is that the random value generated is always '2'. In the actual game, the probablity
+                 of a '2' appearing is 0.9 and prob of '4' occuring is 0.1. the ai is implemented in such a way as to consider these cases
+                 also.
+               </p>
+
               <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
             </div>
           </div>
@@ -431,27 +465,19 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2">
+          <div class="col-lg-12">
             <div class="modal-body">
-              <h2>Project Title</h2>
+              <h2>OpenGL Projects</h2>
               <hr class="star-primary">
               <img src="img/portfolio/circus.png" class="img-responsive img-centered" alt="">
-              <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase
-                the entire set with 146 icons for only $12!</p>
-              <ul class="list-inline item-details">
-                <li>Client:
-                  <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                  </strong>
-                </li>
-                <li>Date:
-                  <strong><a href="http://startbootstrap.com">April 2014</a>
-                  </strong>
-                </li>
-                <li>Service:
-                  <strong><a href="http://startbootstrap.com">Web Development</a>
-                  </strong>
-                </li>
-              </ul>
+
+              <h2>Drawing undirected graphs using Spring Model</h2>
+              <p style="text-align: justify">
+
+              </p>
+
+
+
               <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
             </div>
           </div>
@@ -469,27 +495,55 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2">
+          <div class="col-lg-12">
             <div class="modal-body">
-              <h2>Project Title</h2>
+              <h2>Radio Frequency - Micro Electro Mechanical Systems </h2>
               <hr class="star-primary">
+              <p style="text-align: justify">
+                I did the following projects when I was a 'Research Intern' at Central Electronics Engineering Research
+                Institute (CEERI), Pilani. The projects are in the field of RF-MEMS. Various Technologies were used - MATLAB,
+                CST Microwave Studio, Ansoft HFSS, Atlas Silvaco - to carry out the simulations.
+              </p>
               <img src="img/portfolio/game.png" class="img-responsive img-centered" alt="">
-              <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase
-                the entire set with 146 icons for only $12!</p>
-              <ul class="list-inline item-details">
-                <li>Client:
-                  <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                  </strong>
-                </li>
-                <li>Date:
-                  <strong><a href="http://startbootstrap.com">April 2014</a>
-                  </strong>
-                </li>
-                <li>Service:
-                  <strong><a href="http://startbootstrap.com">Web Development</a>
-                  </strong>
-                </li>
-              </ul>
+              <br />
+
+              <h2>Photo-induced Varactor for Optically Controlled Microwave/ mm-Wave Devices for High Speed Communication:
+                Modelling and Simulation </h2>
+                <br />
+                <h4> Abstract </h4>
+              <p style="text-align: justify">
+                  The past two decades has witnessed the merging of optics and microwave electronics forming
+                  a new area of research now called “microwave photonics”. Continued progress in photonic components and
+                  technology applicable to microwave and millimeter-wave systems is gaining great interest in this
+                  cross-disciplinary field and expanding acceptance of photonics for microwave systems or microwave for
+                  photonic systems.  Direct optical control of microwave semiconductor devices has been an area of microwave
+                  photonics, which has been of interest over the last decade. The basic process used in direct optical control
+                  is photo charge carrier generation within the device, usually, through intrinsic absorption.
+              </p>
+
+              <br />
+
+              <h2> Application of Nanoantenna in harvesting of Solar Energy [Theory & Design] </h2>
+
+              <br />
+              <h4> Abstract </h4>
+
+              <p style="text-align:justify">
+                Antenna is an indispensible component in wireless communication, which is so ubiquitous that we cannot think
+                of our modern life without this. A lot of work has been done on antennae in the radio frequency (RF) range.
+                With ever-increasing demand for reducing space, increasing speed and reducing power requirements, the technology
+                has taken a leap from microscale to nanoscale thereby giving rise to nanotechnology. The advent of nanotechnology
+                thereby reducing size and increasing speed of the electronic devices has compelled the antennae to scale down to
+                nanoscale to gain compatibility with the developing technology.
+
+              </p>
+                <p style="text-align:justify">
+                  This NEC technology may also support several emerging applications, including passive energy management
+                  products, such as building insulation, window coatings, and heat dissipation in small electronic consumer
+                  products, such as, computers. The nantennas are broadband collectors of energy with a tailorable spectral
+                  emission response.
+                </p>
+
               <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
             </div>
           </div>
@@ -512,22 +566,11 @@
               <h2>Project Title</h2>
               <hr class="star-primary">
               <img src="img/portfolio/safe.png" class="img-responsive img-centered" alt="">
-              <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase
-                the entire set with 146 icons for only $12!</p>
-              <ul class="list-inline item-details">
-                <li>Client:
-                  <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                  </strong>
-                </li>
-                <li>Date:
-                  <strong><a href="http://startbootstrap.com">April 2014</a>
-                  </strong>
-                </li>
-                <li>Service:
-                  <strong><a href="http://startbootstrap.com">Web Development</a>
-                  </strong>
-                </li>
-              </ul>
+
+              <p style="text-align: justify">
+
+              </p>
+
               <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
             </div>
           </div>
@@ -550,22 +593,11 @@
               <h2>Project Title</h2>
               <hr class="star-primary">
               <img src="img/portfolio/submarine.png" class="img-responsive img-centered" alt="">
-              <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase
-                the entire set with 146 icons for only $12!</p>
-              <ul class="list-inline item-details">
-                <li>Client:
-                  <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                  </strong>
-                </li>
-                <li>Date:
-                  <strong><a href="http://startbootstrap.com">April 2014</a>
-                  </strong>
-                </li>
-                <li>Service:
-                  <strong><a href="http://startbootstrap.com">Web Development</a>
-                  </strong>
-                </li>
-              </ul>
+
+              <p style="text-align: justify">
+
+              </p>
+
               <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
             </div>
           </div>
