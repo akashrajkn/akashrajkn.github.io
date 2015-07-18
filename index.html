@@ -118,7 +118,7 @@
                 <i class="fa fa-search-plus fa-3x"></i>
               </div>
             </div>
-            <img src="img/portfolio/circus.png" class="img-responsive" alt="">
+            <img src="img/projects/a3.jpg" class="img-responsive" alt="">
           </a>
         </div>
         <div class="col-sm-4 portfolio-item">
@@ -466,11 +466,53 @@
             <div class="modal-body">
               <h2>OpenGL Projects</h2>
               <hr class="star-primary">
-              <img src="img/portfolio/circus.png" class="img-responsive img-centered" alt="">
+              <img src="img/projects/a3.jpg" class="img-responsive img-centered" alt="">
 
               <h2>Drawing undirected graphs using Spring Model</h2>
               <p style="text-align: justify">
+                Graphs(networks) are very common data structures which are handled in computers. Diagrams are
+                widely used to represent the graph structures visually in many information systems. In order to
+                automatically draw the diagrams which are, for example, state graphs,data-flow graphs,Petrinets, and
+                entity-relationship diagrams,basic graph drawing algorithms are required.
+              </p>
 
+              <p style="text-align: justify">
+                The Kamada-Kawai model suggests an algorithm for drawing general undirected graphs. Each graph is seen as
+                follows- a virtual dynamic system in which every two vertices re connected by a 'spring'. Then the optimal
+                layout of veritces is regarded as the state in which the total spring energy of the system is minimal.
+              </p>
+
+              <p style="text-align: justify">
+                In this project, this paper was carefully studied and was tested by implementing the algorithm given in C++.
+                OpenGL was used to add graphics and display the input graph and required output.
+              </p>
+
+              <br />
+
+              <h2>A Classroom Environment</h2>
+
+              <p style="text-align: justify">
+                A classroom environment was created with the help of simple cubes, cuboids and quads. OpenGL transformations was
+                used to create parts of objects such as table, chair, benches, etc. Everything in the render was solid coloured and
+                textures was not used.
+              </p>
+
+              <p style="text-align: justify">
+                Mostly the structure quad (in particular Cubes) were used to make all the objects in the environment. The following
+                objects can be found in the scenario - walls, tables, benches, a book, black board, rotating fans, ceiling, floor
+                with tiles (with chequered pattern) and blackboard. A projector will also be included. Animation has been added to
+                make the fans rotating.
+              </p>
+
+              <img src="img/projects/classroomEnvironment.png" class="img-responsive img-centered" alt="">
+
+              <p style="text-align: justify">
+                The fans are again created by manipulating the DrawTableLeg() function with scaling parameters and translating it to
+                different co-ordinates. Animataion has been added to make the fans spin about its own axis, at different speeds.
+                This is a simple hack involving-translate the fan to origin of world coordinates, use glRotatef() function to rotate
+                the fan to a different angle about its axis and translate the fan back to a different position. Each time the fan
+                is rotated, the glutPostRedisplay() function is called to repaint the window, this gives an illusion of the fan
+                rotating.
               </p>
 
 
