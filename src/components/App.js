@@ -39,10 +39,10 @@ function App({ children, routes }) {
   return (
     <div style={s.root}>
       <h1 style={s.title}>Will be updated soon</h1>
-      <br/>
-      <h2>
+      </br>
+      <h1 style={s.title}>
         <a target="_blank" href="www.jasp-stats.org"> Check out jasp-stats </a>
-      </h2>
+      </h1>
     </div>
   );
 }
