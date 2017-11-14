@@ -24,7 +24,7 @@ function App({ children, routes }) {
       routes.filter(route => route.mapMenuTitle)
         .map((route, index, array) => (
           <span key={index}>
-            <Interactive
+    https://github.com/akashrajkn/akashrajkn.github.io        <Interactive
               as={Link}
               {...s.link}
               to={nextPath(route)}
@@ -39,7 +39,7 @@ function App({ children, routes }) {
   return (
     <div style={s.root}>
       <h1 style={s.title}>Will be updated soon</h1>
-      </br>
+      <br> </br>
       <h1 style={s.title}>
         <a target="_blank" href="www.jasp-stats.org"> Check out jasp-stats </a>
       </h1>
