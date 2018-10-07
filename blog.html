@@ -15,75 +15,25 @@
   </head>
   <body style="padding-bottom: 100px; padding-top:20px;">
 
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <figure class="figure">
+                  <a href="https://akashrajkn.github.io/blogposts/knapsack.html">
+                    <img id="imagepost" src="https://akashrajkn.github.io/resources/bags.jpg" class="img-thumbnail mx-auto d-block" alt="..." width="180">
+                  </a>
+                  <figcaption class="figure-caption text-right">Let's rob a store, shall we?</figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
 
-      <div class="container">
-          <div class="row">
-              <div class="col">
-                  <h1 class="display-3"> Let's rob a store, shall we? </h1>
-                  <label class="bmd-label-floating">Dynamic Programming, Optimization, Algorithm</label>
-                  <p><small> Originally posted on Oct 20, 2014 in my
-                      <a href="https://akashrajkn.wordpress.com/2014/10/20/lets-rob-a-store-shall-we/" target="_blank">previous blog</a>.
-                  </small></p></br>
 
-                  <p style="text-align:justify;"> Suppose we decide to rob a store for for fun :P. Before making a fool out of ourselves during the
-                      robbery, we have a make a plan A, a plan B if ‘A’ fails, a plan C if ‘B’ fails… and so on. </p>
-                  <p style="text-align:justify;"> The great Le Marc (apparently he is an awesome thief in Ocean’s Twelve movie) wants to help us out
-                      and makes all the entry and exit strategies. But leaves the work of actually stealing the items to
-                      us. Of course we are greedy and want to get as much value items as possible. But there is a limit
-                      on the weight a person can carry (C’mon we are only human). Moreover we are Computer Science
-                      Engineers and we love everything to be optimal.</p>
-                  <h4> The 0 - 1 knapsack problem </h4>
-                  <p style="text-align:justify;"> There are different items in the store, each item is valued differently and has a different weight.
-                      Now our job is to rob the place in such a manner that we get the highest loot. What items should we take? The most valued item
-                      may in fact weigh a lot. And Le Marc has imposed another condition on us, we have a rob an item as a whole, we cannot break it.</p>
-                  <h4> Solution </h4>
-                  <p style="text-align:justify;">A greedy approach does not solve our problem (Why? take an example and try it out).
-                      In the 0-1 knapsack problem, we have to decide whether to include an item (in the knapsack) or not. The
-                      original problem consists of subproblems- one that includes an item with the solution and another which
-                      does not include the particular item. This forms many overlapping sub-problems and can be solved using
-                      dynamic programming.</p>
-                  <h5> Recursion and memoization </h5>
-                  <p style="text-align:justify;"> Let <code>w[]</code> denote the weights of the items and <code>v[]</code> denote the values of those items. Suppose that we
-                      have a knapsack that can carry only upto <var>wt</var> weight and <var>n</var> is the number of items.
-                      Then, the recursive solution can be written as</p>
-                  <pre><code>
-int knapsack(int w[], int v[], int wt, int n) {
-  if(wt == 0 || n == 0)
-    return 0;
-
-  if(w[n - 1] > wt)
-    return knapsack(w, v, wt, n - 1);
-  else {
-    return max(v[n - 1] + knapsack(w, v, wt - w[n - 1], n - 1),
-               knapsack(w, v, wt, n - 1));
-  }
-}
-                  </code></pre>
-                  <p style="text-align:justify;">This can be easily be improved by using memoization. Initialize a 2d array
-                      <code>knapsack[n+1][wt+1]</code> with ‘0’. <code>knapsack[i][j]</code> represents the maximum value that can be
-                      obtained from the first ‘i’ items and maximum weight=j.</p>
-                  <pre><code>
-for(i = 0; i <= n; i++) {
-  for(j = 0; j <= wt; j++) {
-    if(i == 0 || j == 0) {
-      knapsack[i][j] = 0;
-    } else if(w[i-1] <= j) {
-      knapsack[i][j] = max(v[i-1] + knapsack[i - 1][j - w[i - 1]],
-                           knapsack[i - 1][j]);
-    } else {
-      knapsack[i][j] = knapsack[i - 1][j];
-    }
-  }
-}
-                  </code></pre>
-
-              </div>
-              <div class="col col-lg-4">
-                </br></br></br></br>
-                  Some image (I'll upload later :P )
-              </div>
-          </div>
-      </div>
+    <style>
+        .img-thumbnail:hover {
+            background-color: #b8bbbc;
+        }
+    </style>
 
 
     <nav class="navbar navbar-expand-lg fixed-bottom navbar-light bg-light">
@@ -114,10 +64,6 @@ for(i = 0; i <= n; i++) {
         </span>
       </div>
     </nav>
-
-
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
