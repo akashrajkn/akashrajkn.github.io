@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Material Design for Bootstrap fonts and icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+
+    <!-- Material Design for Bootstrap CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+
+    <title>eating Stroopwafels</title>
+  </head>
+  <body style="padding-bottom: 100px; padding-top:20px;">
+
+
+      <div class="container">
+          <div class="row">
+              <div class="col">
+                  <h1 class="display-3"> Inversions - Memoization </h1>
+                  <label class="bmd-label-floating">Dynamic Programming, Optimization</label>
+                  <p><small> Originally posted on Oct 18, 2014 in my
+                      <a href="https://akashrajkn.wordpress.com/2014/10/18/spoj-permutations-memoization/" target="_blank">previous blog</a>.
+                  </small></p></br>
+
+                  <h5>Problem posted on <a href="https://www.spoj.com/problems/PERMUT1/" target="_blank">SPOJ.com</a></h5>
+
+                  <p style="text-align:justify;"> In this problem we need to calculate the number of inversions. <code>a</code> contains numbers from 1 to n in a specific order.
+                      An <i>inversion</i> here is defined as <code>a(i) > a(j) && i<=j</code> in one permutation. So the problem reduces to finding those sequences over all
+                      permutations such that they have exactly <code>k</code> permutations. This can be done by brute force - listing out all permutations of numbers (from 1 to n)
+                      and counting those sequences which have exactly k inversions. Since listing all the permutations takes <code>O(n!)</code>, this method would be computationally
+                      intensive for large values of n.</p>
+                  <p style="text-align:justify;"> We can try a recursive approach for this problem. Note that if <code>n = 0</code>, number of permutations is 0, and if <code>k = 0</code>
+                      number of permutations is 1. The recursion is shown below, </p>
+                      <pre><code>
+permut(n) = {
+    0                                          if n == 0;
+    1                                          if k == 0;
+    sum(permut(n - 1, k - i)) (for 0 <= i < n) otherwise
+}
+                      </code></pre>
+                  <p style="text-align:justify;"> This recursion can be coupled with memoization to take care of redundant solving of subproblems. (NOTE: if there are many queries,
+                      it is better to follow a bottom-up approach rather than memoization. In this particular problem there are less than 10 queries). Initialize a 2d array
+                      <code>dp[n][k]</code> with -1. </p>
+                  <pre><code>
+permut(int n, int k) {
+    // boundary cases
+    if(n == 0)
+        return 0;
+    if(k == 0)
+        return 1;
+
+    if(dp[n][k] != -1)
+        return dp[n][k];
+
+    int sum = 0;
+    for(int i = 0; i < n; i++) {
+        sum += permut(n - 1, k - i);
+    }
+
+    return (dp[n][k] = sum);
+}
+                  </code></pre>
+                  <p style="text-align:justify;">Happy Memoization!</p>
+
+              </div>
+              <div class="col col-lg-4">
+                </br></br></br></br>
+                  Some image (I'll upload later :P )
+              </div>
+          </div>
+      </div>
+
+
+    <nav class="navbar navbar-expand-lg fixed-bottom navbar-light bg-light">
+      <!-- <a class="navbar-brand" href="#">Navbar w/ text</a> -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://akashrajkn.github.io">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Research</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="https://akashrajkn.github.io/blog.html">Blog <span class="sr-only">(current)</span> </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Projects</a>
+          </li>
+        </ul>
+        <span class="navbar-text">
+            Check out&nbsp;
+            <a class="navbar-brand" href="https://jasp-stats.org/" target="_blank">
+                <img src="../resources/jasp_logo.png" height="20" alt="JASP">
+            </a>
+        </span>
+      </div>
+    </nav>
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+  </body>
+
+
+
+
+</html>
