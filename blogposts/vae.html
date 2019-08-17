@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Material Design for Bootstrap fonts and icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+
+    <!-- Material Design for Bootstrap CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+
+    <title>eating Stroopwafels</title>
+  </head>
+  <body style="padding-bottom: 100px; padding-top:20px;">
+
+
+      <div class="container">
+          <div class="row">
+              <div class="col">
+
+                  <h1 class="display-3"> Variational Auto-Encoders </h1>
+
+                  <label class="bmd-label-floating">Machine Learning, Optimization</label>
+                  <p><small> Posted on Aug 17, 2019</small></p></br>
+
+                  <p style="text-align:justify;">
+                  In recent years, variational auto-encoders (VAEs) have become increasingly ubiquitous for
+                  unsupervised learning (Kingma and Welling, 2013). The building blocks of VAE employ traditional
+                  neural networks to learn the representation of the input; they can exploit stochastic gradient
+                  descent training procedure. It comprises two modules: the encoder and the decoder. The encoder
+                  maps the input, \(\mathbf{x}\) to the latent space, \(\mathbf{z}\)  (which captures the representation).
+                  The decoder reconstructs the input using the latent space.
+                  </p>
+
+                  <p style="text-align:justify;">
+                  Let \(\mathbf{z} = z_{1:m}\) denote the latent variables and \(\mathbf{x} = x_{1:n}\) denote the observations. The
+                  generative process for \(\mathbf{x}\) is
+                    \begin{align}
+                        p_{\theta}(\mathbf{x}) = \int p_{\theta}(\mathbf{x} | \mathbf{z})\,p_{\theta}(\mathbf{z})\, \text{d}\mathbf{z}
+                    \end{align}
+                    where, \(\theta\) represents trainable parameters of the neural network. The framework utilizes
+                    maximum likelihood principle to generate samples similar to the already observed training data.
+                    The output distribution (of the generated samples) chosen is generally Gaussian (for mathematical
+                    convenience), i.e., \(p(\mathbf{x} | \mathbf{z}, \theta) = \mathcal{N}(\mathbf{x}\, |\, f_{\theta}(\mathbf{z}),\, \sigma^2 \mathbb{I})$\).
+                    The mean, \(f_{\theta}(\mathbf{z})\) is a modeled with a neural network and the covariance is identity matrix,
+                    \(\mathbb{I}\) times a hyper parameter \(\sigma \in \mathbb{R}_{> 0}\).
+                  </p>
+                  <p style="text-align:justify;">
+
+                    In the vanilla implementation of the VAE, a standard Gaussian prior is assumed on each latent
+                    variable, \(z\). We introduce the approximate posterior distribution (also known
+                    as <i>recognition model</i>) of the latent space to be diagonal Gaussian, i.e.,
+                    \(q_{\phi}(\mathbf{z}) = \mathcal{N}(\mathbf{z}\, |\, \mathbf{\mu}_{\phi}(\mathbf{x}),\, \mathbf{\sigma}_{\phi}^2(\mathbf{x}))\).
+
+                    Figure (on the right) shows the graphical model of a variational auto-encoder where the probability
+                    distributions are parameterized by \(\theta\) (neural networks) and the variational distribution,
+                    parameterized by \(\phi\). Following the derivation from previous section, ELBO is
+                    \begin{align}\label{eq:vae_objective}
+                        \mathcal{L}(\theta, \phi; \mathbf{x}) = - \mathcal{KL} \left( q_{\phi}(\mathbf{z} | \mathbf{x})\, ||\, p_{\theta}(\mathbf{z}) \right) + \mathbb{E}_{q_{\phi}(\mathbf{z} | \mathbf{x})} \left[ \log\,p_{\theta}(\mathbf{x} | \mathbf{z}) \right]
+                    \end{align}
+                    The gradient with respect to the variational parameters, \(\phi\) is approximated using Monte Carlo
+                    gradient estimator. The second term in the above equation is perceived as the expected
+                    <i>reconstruction error</i> while the first term is interpreted as the <i>regularization term</i>
+                    that forces the variational distribution to approach the prior. When both the distributions are
+                    Gaussians, the Kullback-Leibler divergence has a closed form,
+                    \begin{align}
+                        \mathcal{KL} \left( q(\mathbf{z})\, ||\, p(\mathbf{z}) \right) &= \int q(\mathbf{z}) \left(\log p(\mathbf{z})  - q(\mathbf{z})\log(q(\mathbf{z})) \right) \text{d}\mathbf{z}\\
+                            &= \int \mathcal{N}(\mathbf{z}\, |\, \mathbf{\mu}, \mathbf{\sigma}^2) \log \mathcal{N}(\mathbf{z}\, |\, \mathbf{0}, \mathbf{1}) \text{d}\mathbf{z} - \int \mathcal{N}(\mathbf{z}\, |\, \mathbf{\mu}, \mathbf{\sigma}^2) \log \mathcal{N}(\mathbf{z}\, |\, \mathbf{\mu}, \mathbf{\sigma}^2) \text{d}\mathbf{z} \\
+                            &= - \frac{M}{2} \log(2 \pi) - \frac{1}{2} \sum_{m=1}^M (\mu_m^2 + \sigma_m^2) + \frac{M}{2} \log(2\pi) + \frac{1}{2} \sum_{m=1}^M(1 + \log \sigma_m^2) \\
+                            &= - \frac{1}{2} \sum_{m=1}^M \left( 1 + 2 \log \sigma_m - \mu_m^2 - \sigma_m^2 \right)
+                    \end{align}
+                    where \(M\) is the dimensionality of the latent space. Although the expectation of log likelihood can be
+                    approximated using MC estimates, we cannot use backpropagation through samples. This issue is addressed
+                    with the <i>reparameterization trick</i> (Rezende et al., 2014; Kingma andWelling, 2013) by moving the
+                    sampling to an input layer - this makes the sample a differentiable transformation of a fixed random source.
+                    A sample from \(\mathcal{N}(\mathbf{z}\, |\, \mu_{\phi}(\mathbf{x}),\, \sigma_{\phi}(\mathbf{x}))\) can be
+                    generated thus:
+                    \begin{align}
+                        \begin{split}
+                            \epsilon &\sim \mathcal{N}(\mathbf{0}, \mathbf{I}) \\
+                            \mathbf{z} &= \mu_{\phi} + \sigma_{\phi} \odot \epsilon
+                        \end{split}
+                    \end{align}
+                    \(\odot\) denotes element-wise multiplication. This technique moves the randomness from the latent variable
+                    \(\mathbf{z}\) to \(\epsilon\), which does not depend on parameter \(\phi\), thus allowing gradient computation.
+                  </p>
+
+
+
+
+                  </br></br>
+
+                  <h4>References</h4>
+                  <ol>
+                    <li>
+                      Kingma, D. P. and Welling, M. (2013). Auto-encoding variational bayes. <i>arXiv preprint arXiv:1312.6114</i>.
+                    </li>
+                    <li>
+                      Rezende, D. J., Mohamed, S., and Wierstra, D. (2014). Stochastic backpropagation and
+                      approximate inference in deep generative models. <i>arXiv preprint arXiv:1401.4082.</i>
+                    </li>
+                  </ol>
+
+              </div>
+              <div class="col col-lg-4">
+                </br></br></br></br>
+                  <figure class="figure">
+                    <center>
+                      <img id="img" src="../resources/vae.png" alt="..." width="250">
+                    </center>
+                    <figcaption class="figure-caption text-center">VAE Graphical model</figcaption>
+                  </figure>
+              </div>
+          </div>
+      </div>
+
+
+    <nav class="navbar navbar-expand-lg fixed-bottom navbar-light bg-light">
+      <!-- <a class="navbar-brand" href="#">Navbar w/ text</a> -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://akashrajkn.github.io">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://akashrajkn.github.io/research.html">Research</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="https://akashrajkn.github.io/blog.html">Blog <span class="sr-only">(current)</span> </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Projects</a>
+          </li>
+        </ul>
+        <span class="navbar-text">
+            Check out&nbsp;
+            <a class="navbar-brand" href="https://jasp-stats.org/" target="_blank">
+                <img src="../resources/jasp_logo.png" height="20" alt="JASP">
+            </a>
+        </span>
+      </div>
+    </nav>
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+  </body>
+
+
+
+
+</html>
