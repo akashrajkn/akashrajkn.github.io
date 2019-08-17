@@ -22,7 +22,8 @@
 
                   <h1 class="display-3"> Variational Inference </h1>
 
-                  <label class="bmd-label-floating">Machine Learning</label>
+                  <label class="bmd-label-floating">Machine Learning, Optimization</label>
+                  <p><small> Posted on Aug 16, 2019</small></p></br>
 
                   <!-- <h5>Problem posted on <a href="http://www.spoj.com/problems/TRT/" target="_blank">SPOJ.com</a></h5> -->
 
@@ -82,9 +83,31 @@
                   \end{align}
                   since Kullback-Leibler divergence is always non-negative. Hence, maximizing ELBO is equivalent to minimizing the \(\mathcal{KL}\left(q(\mathbf{z})\, ||\, p(\mathbf{z} | \mathbf{x})\right)\) objective.
                   </p>
+                  </br></br>
+
+                  <h4>References</h4>
+                  <ol>
+                    <li>
+                      Blei, D. M., Kucukelbir, A., and McAuliffe, J. D. (2017). Variational inference: A review for statisticians. <i>Journal of the American Statistical Association</i>, 112(518):859-877.
+                    </li>
+                    <li>
+                      Srivastava, A. and Sutton, C. (2017). Autoencoding variational inference for topic models. <i>arXiv preprint arXiv:1703.01488</i>.
+                    </li>
+                    <li>
+                      Kendall, A. and Gal, Y. (2017). What uncertainties do we need in bayesian deep learning for computer vision? In <i>Advances in neural information processing systems</i>, pages 5574-5584.
+                    </li>
+                  </ol>
+
               </div>
               <div class="col col-lg-4">
                 </br></br></br></br>
+                  <!-- <img id="img" src="../resources/vi.png" alt="..." width="250"> -->
+                  <figure class="figure">
+                    <center>
+                    <img id="img" src="../resources/vi.png" alt="..." width="250">
+                    </center>
+                    <figcaption class="figure-caption text-center">Mean-field approximation to a 2-dimensional Gaussian posterior. Original illustration is from (Blei, et al., 2017)</figcaption>
+                  </figure>
               </div>
           </div>
       </div>
